@@ -1,0 +1,58 @@
+### Necessário para pegar o token
+
+### Post
+# @name loginAutenticado
+POST http://localhost:40000/Login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "qwe",
+    "password": "qwe"
+}
+
+### Seta o token
+@accessToken = {{loginAutenticado.response.body.$.token}}
+@username = {{loginAutenticado.response.body.$.username}}
+
+### teste de inserção de fornecedor
+POST http://localhost:40000/insertFornecedor HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "fornecedorid": 0,
+    "cnpj": "19124112000182",
+    "nome": "Carlos das Matias",
+    "email": "carlos@gmail.com",
+    "deleted": false
+}
+
+### teste de buscar todos os fornecedores
+GET http://localhost:40000/getAllFornecedores HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+}
+
+### teste de buscar fornecedor por ID
+GET http://localhost:40000/getFornecedorByID/1 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+### teste de atualização de fornecedor
+PUT http://localhost:40000/updateFornecedor/1 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "cnpj": "18964060000190",
+    "nome": "Carlos das Matas",
+    "email": "matas@gmail.com",
+    "deleted": false
+}
+
+### teste de deleção de fornecedor
+DELETE http://localhost:40000/deleteFornecedor/1 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}

@@ -1,0 +1,69 @@
+### Necessário para pegar o token
+
+### Post
+# @name loginAutenticado
+POST http://localhost:40000/Login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "qwe",
+    "password": "qwe"
+}
+
+### Seta o token
+@accessToken = {{loginAutenticado.response.body.$.token}}
+@username = {{loginAutenticado.response.body.$.username}}
+
+### teste de inserção de conta
+POST http://localhost:40000/insertConta HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "contapagarid": 0,
+    "descricao": "Conta de gás",
+    "valor": 499.99,
+    "datavencimento": "2026-10-15",
+    "datapagamento": "2026-10-11",
+    "pago": true,
+    "fornecedorid": 1,
+    "deleted": false
+}
+
+### teste de buscar todos as contas
+GET http://localhost:40000/getAllContas HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+}
+
+### teste de buscar conta por ID
+GET http://localhost:40000/getContaByID/1 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+### teste de atualização de conta
+PUT http://localhost:40000/updateConta/1 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "descricao": "Conta de energia",
+    "valor": 1950.75,
+    "datavencimento": "2026-10-25",
+    "datapagamento": "2026-10-04",
+    "pago": true,
+    "fornecedorid": 2,
+    "deleted": false
+}
+
+### teste de deleção de conta
+DELETE http://localhost:40000/deleteConta/1 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+### teste de buscar fornecedores para contas
+GET http://localhost:40000/getFornecedoresToContas HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
