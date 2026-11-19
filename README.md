@@ -8,7 +8,7 @@ Sistema web para controle financeiro de **contas a pagar** e dos **fornecedores*
 
 Centralizar o cadastro de fornecedores e o acompanhamento das contas a pagar de uma empresa, permitindo saber **o que deve ser pago, quando vence, a quem se deve e se já foi pago**. O projeto também serve como exemplo prático de uma aplicação **Node.js em camadas** (rotas → controller → model) com front-end separado e autenticação por token.
 
-## Funcionalidades
+## Funcionalidades 
 
 **Autenticação**
 - Login com usuário e senha (senhas armazenadas com hash *bcrypt*).
